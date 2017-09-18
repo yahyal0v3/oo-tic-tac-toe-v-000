@@ -78,18 +78,43 @@ class TicTacToe
   end
 
   def won?
-  winning_combination = false
-  WIN_COMBINATIONS.each do |win_combination|
-    position_1 = @board[win_combination[0]]
-    position_2 = @board[win_combination[1]]
-    position_3 = @board[win_combination[2]]
+    winning_combination = false
+    WIN_COMBINATIONS.each do |win_combination|
+      position_1 = @board[win_combination[0]]
+      position_2 = @board[win_combination[1]]
+      position_3 = @board[win_combination[2]]
 
-    if position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 == "O"
-      winning_combination = win_combination
+      if position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 == "O"
+        winning_combination = win_combination
+      end
+    end
+    winning_combination
+  end
+
+  def full?
+    @board.all? do |positions|
+      positions != " "
     end
   end
-  winning_combination
-end
+
+  def draw?
+    if full? == true && won? == false
+      true
+    end
+  end
+
+  def over?
+    if draw? == true || won? != false
+      true
+    end
+  end
+
+  def winner
+    if won? != false
+      array = won?
+      @board[array[0]]
+    end
+  end
 
 
 end
